@@ -1,0 +1,81 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body.sticky-footer {
+  margin-bottom: 56px;
+}
+
+body.sticky-footer .content-wrapper {
+  min-height: calc(100vh - 56px - 56px);
+}
+
+body.fixed-nav {
+  padding-top: 56px;
+}
+
+body nav img {
+  margin: 0 auto;
+}
+
+.gutters {
+  padding: 10px;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.third-width {
+  width: 33.33%;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 56px);
+  padding-top: 1rem;
+}
+
+.content-wrapper {
+  overflow-x: hidden;
+  background: white;
+}
+
+#current-price, #miner-count, #total-work {
+  font-size: 50px;
+  min-height: 125px;
+  text-align: center;
+}
+
+.btn-wrapper {
+  width: 100%;
+}
+
+.btn-wrapper .mine-btn {
+  display: inline-block;
+  width: 45%;
+  height: 75px;
+  margin: 0 2.5%;
+  font-size: 24px;
+}
+
