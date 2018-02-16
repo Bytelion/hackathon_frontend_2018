@@ -76,6 +76,10 @@ function removeData(chart) {
   chart.update();
 }
 
+function format(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 (function() {
   socket.on('connect', function() {
     console.log('connected');
@@ -89,14 +93,14 @@ function removeData(chart) {
     for(var i=0; i < elements.length; i++) { 
       elements[i].innerHTML = 'Updated today at ' + time;
     }
-    document.getElementById('current-price').innerHTML = response.bytecoin_price;
+    document.getElementById('current-price').innerHTML = '$' + format(response.bytecoin_price);
     document.getElementById('miner-count').innerHTML = response.miner_count;
-    document.getElementById('total-work').innerHTML = response.total_work;
+    document.getElementById('total-work').innerHTML = response.total_work + ' kH/s';
     if (volume.length >= 10) {
       removeData(myLineChart)
     }
     addData(myLineChart, time, response.bytecoin_price);
-  }); 
+  });
 })();
 
 function mine() {
