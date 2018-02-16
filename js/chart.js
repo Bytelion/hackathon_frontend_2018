@@ -46,7 +46,7 @@ var myLineChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 16000,
+          max: 20000,
           maxTicksLimit: 5
         },
         gridLines: {
@@ -85,7 +85,6 @@ function format(num) {
     console.log('connected');
   });
   socket.on('stats', function(response) {
-    console.log(response);
     // -- Time Stamp
     var now = new Date($.now());
     var time = now.toLocaleTimeString();
@@ -95,7 +94,7 @@ function format(num) {
     }
     document.getElementById('current-price').innerHTML = '$' + format(response.bytecoin_price);
     document.getElementById('miner-count').innerHTML = response.miner_count;
-    document.getElementById('total-work').innerHTML = response.total_work + ' kH/s';
+    document.getElementById('total-work').innerHTML = response.total_work + ' <span style="font-size: 24px"> kH/s</span>';
     if (volume.length >= 10) {
       removeData(myLineChart)
     }
