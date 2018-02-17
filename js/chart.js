@@ -7,6 +7,8 @@ Chart.defaults.global.defaultFontColor = '#292b2c';
 var baseURL = 'http://ec2-34-203-202-182.compute-1.amazonaws.com:8080/';
 var socket = io.connect(baseURL + 'bytecoin');
 
+var globalPerformance = null;
+
 // -- Trade Chart
 var ctx = document.getElementById("myAreaChart");
 var timeLabels = [];
@@ -80,6 +82,35 @@ function format(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function doWork() {
+  for (var i = 0; i < 100000000; i++) {
+    i % 5915587277;
+  }
+}
+
+function getPerformance() {
+
+  var t1 = performance.now();
+  doWork();
+  var t2 = performance.now();
+  globalPerformance = Math.floor(t2 - t1);
+  return Math.floor(t2 - t1);
+}
+
+function mine() {
+  document.getElementById('start-mine').disabled = true;
+  document.getElementById('stop-mine').disabled = false;
+  socket.emit('add_miner');
+  socket.emit('add_mining_speed', getPerformance());
+}
+
+function stopMine() {
+  document.getElementById('start-mine').disabled = false;
+  document.getElementById('stop-mine').disabled = true;
+  socket.emit('subtract_miner');
+  socket.emit('subtract_mining_speed', globalPerformance);
+}
+
 (function() {
   socket.on('connect', function() {
     console.log('connected');
@@ -101,15 +132,3 @@ function format(num) {
     addData(myLineChart, time, response.bytecoin_price);
   });
 })();
-
-function mine() {
-  document.getElementById('start-mine').disabled = true;
-  document.getElementById('stop-mine').disabled = false;
-  socket.emit('add_miner');
-}
-
-function stopMine() {
-  document.getElementById('start-mine').disabled = false;
-  document.getElementById('stop-mine').disabled = true;
-  socket.emit('subtract_miner');
-}
