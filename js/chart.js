@@ -89,12 +89,12 @@ function doWork() {
 }
 
 function getPerformance() {
-
   var t1 = performance.now();
   doWork();
   var t2 = performance.now();
-  globalPerformance = Math.floor(t2 - t1);
-  return Math.floor(t2 - t1);
+  var localPerformance = Math.floor(1 / (t2 - t1) * 100000);
+  globalPerformance = localPerformance;
+  return globalPerformance;
 }
 
 function mine() {
@@ -120,7 +120,7 @@ function stopMine() {
     var now = new Date($.now());
     var time = now.toLocaleTimeString();
     var elements = document.getElementsByClassName('time-stamp');
-    for(var i=0; i < elements.length; i++) { 
+    for(var i=0; i < elements.length; i++) {
       elements[i].innerHTML = 'Updated today at ' + time;
     }
     document.getElementById('current-price').innerHTML = '$' + format(response.bytecoin_price);
