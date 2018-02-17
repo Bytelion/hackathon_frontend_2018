@@ -125,7 +125,7 @@ function stopMine() {
     }
     document.getElementById('current-price').innerHTML = '$' + format(response.bytecoin_price);
     document.getElementById('miner-count').innerHTML = response.miner_count;
-    document.getElementById('total-work').innerHTML = response.total_work + ' <span style="font-size: 24px"> kH/s</span>';
+    document.getElementById('total-work').innerHTML = format(response.total_work) + ' <span style="font-size: 24px"> kH/s</span>';
     if (volume.length >= 10) {
       removeData(myLineChart)
     }
